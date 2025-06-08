@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Convite com Senha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet" />
+    <style>
+      body, html {
+        margin: 0; padding: 0; height: 100%; display: flex; justify-content: center; align-items: center;
+        background: #1e1a1f; color: white; font-family: 'Dancing Script', cursive;
+      }
+      #loginBox {
+        text-align: center;
+      }
+      input[type=password] {
+        padding: 10px;
+        font-size: 1.2em;
+        border-radius: 5px;
+        border: none;
+        margin-top: 20px;
+      }
+      button {
+        margin-left: 10px;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        background-color: #e74c3c;
+        color: white;
+        font-family: 'Dancing Script', cursive;
+      }
+      #errorMsg {
+        color: #ff6666;
+        margin-top: 15px;
+        height: 20px;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loginBox">
+      <h1>Digite a senha para abrir o convite</h1>
+      <input type="password" id="passwordInput" placeholder="Senha" />
+      <button id="loginButton">Entrar</button>
+      <div id="errorMsg"></div>
+    </div>
+
+    <!-- p5.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <!-- Seu sketch.js só será carregado depois -->
+    <script>
+      const senhaCorreta = "iuryamakaka"; 
+      const loginBox = document.getElementById('loginBox');
+      const passwordInput = document.getElementById('passwordInput');
+      const loginButton = document.getElementById('loginButton');
+      const errorMsg = document.getElementById('errorMsg');
+
+      loginButton.addEventListener('click', () => {
+        const senhaDigitada = passwordInput.value.trim();
+        if (senhaDigitada === senhaCorreta) {
+          // Esconde a tela de login
+          loginBox.style.display = 'none';
+          // Cria o canvas do p5.js
+          loadSketch();
+        } else {
+          errorMsg.textContent = "Senha incorreta, tente novamente.";
+        }
+      });
+
+      function loadSketch() {
+        const script = document.createElement('script');
+        script.src = 'sketch.js'; // seu arquivo p5.js
+        document.body.appendChild(script);
+      }
+    </script>
+  </body>
+</html>
